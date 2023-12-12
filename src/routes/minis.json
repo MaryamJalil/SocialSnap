@@ -1,0 +1,128 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "My API",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/api/minis/create_minis": {
+        "post": {
+          "tags": ["Minis"],
+          "summary": "Create a new Mini",
+          "description": "Create a new Mini with the given parameters",
+          "operationId": "create_minis",
+          "requestBody": {
+            "description": "Mini object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "caption": {
+                      "type": "string",
+                      "description": "Caption for the Mini"
+                    },
+                    "is_public": {
+                      "type": "boolean",
+                      "description": "Is the Mini public or private"
+                    },
+                    "hash_tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of hash tags"
+                    },
+                    "mentions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of mentions"
+                    },
+                    "lat": {
+                      "type": "number",
+                      "description": "Latitude"
+                    },
+                    "lng": {
+                      "type": "number",
+                      "description": "Longitude"
+                    },
+                    "city": {
+                      "type": "string",
+                      "description": "City"
+                    },
+                    "state": {
+                      "type": "string",
+                      "description": "State"
+                    },
+                    "country": {
+                      "type": "string",
+                      "description": "Country"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Mini has been created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "description": "HTTP status code"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Response message"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "create_mini": {
+                            "type": "object",
+                            "description": "The created Mini object"
+                          },
+                          "has_tag_count": {
+                            "type": "number",
+                            "description": "Number of times hash tags have been used"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error creating Mini",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "number",
+                        "description": "HTTP status code"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Error message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

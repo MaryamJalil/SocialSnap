@@ -1,0 +1,682 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My User Project CRUD",
+    "license": {
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/admin/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "credentials",
+            "in": "body",
+            "description": "The email and password for login.",
+  
+            "schema": {
+              "$ref": "#/definitions/Credentials"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/verifyUser_apple_id": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "verifyUser_apple_id",
+            "in": "body",
+  
+            "schema": {
+              "$ref": "#/definitions/verifyUser_apple_id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login is successful."
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/google_login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "google_login",
+            "in": "body",
+  
+            "schema": {
+              "$ref": "#/definitions/google_login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login is successful."
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/apple_login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "apple_login",
+            "in": "body",
+  
+            "schema": {
+              "$ref": "#/definitions/apple_login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login is successful."
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/signup": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "step",
+            "in": "formData",
+            "type": "string",
+            "enum": [
+              "first",
+              "second"
+            ]
+          },
+          {
+            "name": "first_name",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "last_name",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "phone_no",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "type": "string",
+            "minLength": 6
+          },
+          {
+            "name": "referral_code",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "name": "your_interests",
+            "in": "formData",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }          },
+          {
+            "name": "profile_image",
+            "in": "formData",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    
+    "/api/users/registeration": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "registerUser",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "first_name",
+            "in": "formData",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "last_name",
+            "in": "formData",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "type": "string",
+            "format": "email",
+            "required": true
+          },
+          {
+            "name": "phone_no",
+            "in": "formData",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "gender",
+            "in": "formData",
+            "type": "string",
+            "enum": ["male", "female"],
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "profile_image",
+            "in": "formData",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/minis/create_minis": {
+      "post": {
+        "tags": ["Minis"],
+        "operationId": "create_minis",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "caption",
+            "in": "formData",
+            "description": "Caption for the Mini",
+  
+            "type": "string"
+          },
+          {
+            "name": "is_public",
+            "in": "formData",
+            "description": "Is the Mini public or private",
+  
+            "type": "boolean"
+          },
+          {
+            "name": "video",
+            "in": "formData",
+            "description": "The video file to upload.",
+            "required": true,
+            "type": "file"
+          },          
+          {
+            "name": "hash_tags",
+            "in": "formData",
+            "description": "List of hash tags",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mentions",
+            "in": "formData",
+            "description": "List of mentions",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lat",
+            "in": "formData",
+            "description": "Latitude",
+  
+            "type": "number"
+          },
+          {
+            "name": "lng",
+            "in": "formData",
+            "description": "Longitude",
+  
+            "type": "number"
+          },
+          {
+            "name": "city",
+            "in": "formData",
+            "description": "City",
+  
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "formData",
+            "description": "State",
+  
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "in": "formData",
+            "description": "Country",
+  
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/minis/trending_minis": {
+      "get": {
+        "tags": ["Minis"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "api/minis/saved_minis_byId": {
+      "post": {
+        "tags": ["Minis"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mini_id": {
+                  "type": "string",
+                  "description": "ID of the mini to save or unsave"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Invalid request parameters.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+            
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorResponse"
+            }
+          }
+        }
+      }
+}    
+  },
+  "definitions": {
+    "Credentials": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The user's email address",
+          "format": "email"
+        },
+        "password": {
+          "type": "string",
+          "description": "The user's password"
+        }
+      },
+      "required": ["email", "password"]
+    }, 
+    "verifyUser_apple_id": {
+      "type": "object",
+      "properties": {
+        "apple_id": {
+          "type": "string",
+          "description": "The user's Apple ID",
+           "format": "apple_id"
+        }
+      },
+      "required": ["apple_id"]
+    }, 
+    
+    "google_login": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "description": "The user's Apple ID",
+           "format": "accessToken"
+        }
+      },
+      "required": ["accessToken"]
+    }, 
+    "apple_login": {
+      "type": "object",
+      "properties": {
+        "familyName": {
+          "type": "string",
+          "format": "familyName"
+        },
+        "givenName": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        }  ,
+        "email": {
+          "type": "string"
+        } ,
+          "phone_no": {
+          "type": "string"
+        }
+      },
+      "required": ["familyName", "givenName", "user","email","phone_no"]
+    }, 
+    "register": {
+      "description": "Endpoint for user registration",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "description": "The first name of the user"
+                },
+                "last_name": {
+                  "type": "string",
+                  "description": "The last name of the user"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "The email address of the user"
+                },
+                "phone_no": {
+                  "type": "string",
+                  "description": "The phone number of the user"
+                },
+                "gender": {
+                  "type": "string",
+                  "description": "The gender of the user"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "The password for the user account"
+                },
+                "address": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string",
+                      "description": "The city of the user's address"
+                    },
+                    "country": {
+                      "type": "string",
+                      "description": "The country of the user's address"
+                    }
+                  }
+                }
+              },
+              "required": ["first_name", "last_name", "email", "phone_no", "gender", "password"]
+            }
+          }
+        }
+      }
+    },      
+      "BadRequestResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "example": 400,
+            "description": "The status code of the response."
+          },
+          "message": {
+            "type": "string",
+            "example": "Bad request parameters.",
+            "description": "A message describing the error."
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "description": "The field name of the invalid parameter."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "A message describing the validation error."
+                }
+              }
+            }
+          }
+        }
+      },
+      "InternalServerErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "example": 500,
+            "description": "The status code of the response."
+          },
+          "message": {
+            "type": "string",
+            "example": "Internal server error.",
+            "description": "A message describing the error."
+          }
+        }
+      }
+  }}
+    

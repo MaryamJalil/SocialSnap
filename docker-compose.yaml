@@ -1,0 +1,30 @@
+version: "3"
+services:
+  app:
+    image: rc-node-image:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      MONGO_URL: ${mongodburl}
+      JWT_PRIVATE_KEY: ${jwtPrivateKey}
+      PORT: ${PORT}
+      AWS_SECRET_ACCESS_KEY: ${secretAccessKey}
+      AWS_ACCESS_KEY_ID: ${accessKeyId}
+      AWS_REGION: ${region}
+      AWS_BUCKET_NAME: ${AWS_BUCKET_NAME}
+      FCM_SERVER_KEY: ${FCM_SERVER_KEY}
+    env_file:
+      - .env
+  db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: socialsnap
+      MONGO_INITDB_ROOT_PASSWORD: Qe6CO5cJunwFCyFq
+      MONGO_INITDB_DATABASE: test
+    ports:
+      - "27017:27017"
+
